@@ -1,7 +1,9 @@
+import matplotlib
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt 
 import numpy as np
 import os
-import coordtrans as coord
+#import coordtrans as coord
 
 class plot:
     def __init__(self, x, y, title, xaxis, yaxis, coord = "Cart"):
@@ -53,12 +55,12 @@ class plot:
         
 
 
-
+"""
 
 #Plotting Simple Scatter Plot
 p1 = plot(np.linspace(0,10,100), np.linspace(0, 10,100), "Testing Save feature", "xaxis label","yaxis label")
 p1.plotscatter(save = True, impath = "../testplots/a1.jpeg", marker = "x")
-
+"""
 
 """
 #Plotting vector fields (cartesian) 

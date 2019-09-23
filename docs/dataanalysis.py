@@ -14,13 +14,6 @@ class analysis():
         reg = LinearRegression()
         reg.fit(x,y)
         ypred = reg.predict(x)
-        
-        """
-        x = np.reshape(x,(1,len(x))) #Undoing reshaping
-        ypred = np.reshape(ypred,(1,len(ypred))) #Undoing reshaping
-        x.tolist()
-        ypred.tolist()
-        """
         return [x,ypred]
     def plotlinreg(self):
         [x, ypred] = self.linreg()
@@ -28,7 +21,7 @@ class analysis():
         self.plot.gety(ypred)
         self.plot.getx(x)
         self.plot.plotscatter(clear = True, marker = '--')
-
+"""
 #Formatting 
 plt.close()
 
@@ -40,14 +33,6 @@ p1 = bp.plot(x, y, "Test Reg", "x","y")
 #Plotting fit 
 a1 = analysis(p1)
 a1.plotlinreg()
-
 """
-a1 = analysis(p1) 
-[x, ypred] = a1.linreg()
 
-#Plotting plot
-p1.plotscatter(clear = False)
-p1.gety(ypred)
-p1.getx(x)
-p1.plotscatter(clear = True, marker = '--')
-"""
+
