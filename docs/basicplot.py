@@ -1,12 +1,13 @@
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt 
+from mpl_toolkits.mplot3d import axes3d, Axes3D
 import numpy as np
 import os
 #import coordtrans as coord
 
 class plot:
-    def __init__(self, x, y, title, xaxis, yaxis, coord = "Cart"):
+    def __init__(self, x, y, title = "title", xaxis = "xaxis", yaxis = "yaxis", coord = "Cart"):
         self.x = x 
         self.y = y 
         self.title = title
@@ -30,7 +31,31 @@ class plot:
         else:
             if clear == True:
                 plt.show()
+    def plot3D (self, z, zaxis = "zaxis", type = "line"):
+        fig = plt.figure()
+        ax = plt.axes(projection="3d")
+
+        if type == "scatter":
+            ax.scatter3D(self.x, self.y, z, c=z, cmap='hsv')
+        elif type == "line":
+            ax.plot3D(self.x, self.y, z, 'grey')
+        elif type == "wireframe":
+            X, Y = np.meshgrid(x,y)
+            Z = z(X,Y)
+            ax.plot_wireframe(X,Y,Z, color = 'green')
+        elif type == "surface":
+            X, Y = np.meshgrid(x,y)
+            Z = z(X,Y)
+            ax.plot_surface(X,Y,Z, cmap = 'winter', rstride = 1, cstride = 1)
+            
+        #Apply Labels
+        ax.set_xlabel(self.xaxis)
+        ax.set_ylabel(self.yaxis)
+        ax.set_zlabel(zaxis)
+        ax.set_title(self.title)
+        plt.show() 
         
+
         
     def getvectorfield(self, vfield):
         self.vfield = vfield 
@@ -86,6 +111,17 @@ p2.getvectorfield(F)
 c2 = coord.coordtrans()
 c2.sph_car(p2)
 """
+"""
+#Plotting 3D graph 
 
+x = np.linspace(-6, 6, 30)
+y = np.linspace(-6, 6, 30)
+
+
+#x = np.linspace(-6,6,30)
+#y = np.cos(x)
+p1 = plot(x,y)
+p1.plot3D(z = lambda x, y: np.sin(np.sqrt(x**2+y**2)), type = 'surface')
+"""
 
 

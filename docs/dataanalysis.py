@@ -1,12 +1,15 @@
 import matplotlib.pyplot as plt 
 from sklearn.linear_model import LinearRegression
+import sys
+sys.path.append("/mnt/c/Users/sneha/Onedrive/Desktop/Oxford/OxComp/PhysicsEssentials/docs")
 import basicplot as bp
 import numpy as np
+import statsmodels.api as sm
 
 class analysis():
     def __init__(self, plot):
         self.plot = plot
-    def linreg(self):
+    def linreg(self,stats = True):
         x = self.plot.x
         y = self.plot.y
         x = np.reshape(x,(len(x),1)) #Reshaping for Linear Regression
@@ -14,6 +17,11 @@ class analysis():
         reg = LinearRegression()
         reg.fit(x,y)
         ypred = reg.predict(x)
+        if stats == True:
+            xstat = sm.add_constant(x)
+            model = sm.OLS(y,xstat).fit()
+            print(model.summary())
+	    
         return [x,ypred]
     def plotlinreg(self):
         [x, ypred] = self.linreg()
